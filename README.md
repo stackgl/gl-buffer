@@ -5,15 +5,6 @@ A wrapper for WebGL buffer objects.
 # Example
 
 ```javascript
-```
-
-# Install
-
-    npm install gl-buffer
-
-# API
-
-```javascript
 var shell = require("gl-now")()
 var createShader = require("gl-shader")
 var createBuffer = require("gl-buffer")
@@ -52,6 +43,16 @@ shell.on("gl-init", function() {
 shell.on("gl-render", function(t) {
   buffer.draw(shell.gl.TRIANGLES, 3)
 })
+```
+
+# Install
+
+    npm install gl-buffer
+
+# API
+
+```javascript
+var createBuffer = require("gl-buffer")
 ```
 
 ## Constructor
