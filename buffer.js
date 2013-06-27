@@ -52,17 +52,24 @@ GLBuffer.prototype.update = function(array, offset) {
     this.gl.bufferData(this.type, array, this.usage)
     this.length = array
   } else if(array.shape) {
+    var dtype = array.dtype
+    if(dtype === "float64" || dtype === "array" || dtype === "generic") {
+      dtype = "float32"
+    }
+    if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
+      dtype = "uint16"
+    }
     if(array.shape.length !== 1) {
       throw new Error("Array length must be 1")
     }
-    if(array.stride[0] === 1) {
+    if(dtype === array.dtype && array.stride[0] === 1) {
       if(array.offset === 0 && array.data.length === array.shape[0]) {
         this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, array.data, offset)
       } else {
         this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, array.data.subarray(array.offset, array.shape[0]), offset)
       }
     } else {
-      var tmp = pool.malloc(array.shape[0], ndarray.dtype(array))
+      var tmp = pool.malloc(array.shape[0], dtype)
       var ndt = ndarray(tmp)
       ops.assign(ndt, array)
       this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp, offset)
@@ -121,14 +128,21 @@ function createBuffer(gl, type, data, usage) {
     gl.bufferData(type, data, usage)
     len = data.length
   } else if(data.shape) {
+    var dtype = data.dtype
+    if(dtype === "float64" || dtype === "array" || dtype === "generic") {
+      dtype = "float32"
+    }
+    if(type === gl.ELEMENT_ARRAY_BUFFER) {
+      dtype = "uint16"
+    }
     if(data.shape.length !== 1) {
       throw new Error("Array shape must be 1D")
     }
     var len = data.shape[0]
-    if(data.stride[0] === 1) {
+    if(dtype === data.type && data.stride[0] === 1) {
       gl.bufferData(type, data.data.subarray(data.offset, data.offset+len), usage)
     } else {
-      var tmp = pool.malloc(data.shape[0], ndarray.dtype(data))
+      var tmp = pool.malloc(data.shape[0], dtype)
       var ndt = ndarray(tmp)
       ops.assign(ndt, data)
       this.gl.bufferData(this.type, tmp, usage)

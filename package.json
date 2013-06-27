@@ -1,15 +1,15 @@
 {
   "name": "gl-buffer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "WebGL buffer wrapper",
   "main": "buffer.js",
   "directories": {
     "example": "example"
   },
   "dependencies": {
-    "ndarray": "~0.2.4",
+    "ndarray": "~1.0.0",
     "typedarray-pool": "~0.1.1",
-    "ndarray-ops": "~0.1.3"
+    "ndarray-ops": "~1.1.0"
   },
   "devDependencies": {
     "gl-shader": "~0.0.2",
