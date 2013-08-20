@@ -20,7 +20,7 @@ GLBuffer.prototype.dispose = function() {
 }
 
 function updateTypeArray(gl, type, len, usage, data, offset) {
-  if(offset < 0 && data.length > len) {
+  if(offset <= 0 && data.length > len) {
     gl.bufferData(type, data, usage)
     return data.length
   }
