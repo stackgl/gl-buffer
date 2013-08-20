@@ -4,11 +4,12 @@ var pool = require("typedarray-pool")
 var ops = require("ndarray-ops")
 var ndarray = require("ndarray")
 
-function GLBuffer(gl, type, handle, length) {
+function GLBuffer(gl, type, handle, length, usage) {
   this.gl = gl
   this.type = type
   this.handle = handle
   this.length = length
+  this.usage = usage
 }
 
 GLBuffer.prototype.bind = function() {
@@ -108,7 +109,7 @@ function createBuffer(gl, type, data, usage) {
     data = type
     type = gl.ARRAY_BUFFER
   }
-  if(usage === undefined) {
+  if(!usage) {
     usage = gl.DYNAMIC_DRAW
   }
   var len = 0
@@ -151,7 +152,7 @@ function createBuffer(gl, type, data, usage) {
   } else {
     throw new Error("Invalid format for buffer data")
   }
-  return new GLBuffer(gl, type, handle, len)
+  return new GLBuffer(gl, type, handle, len, usage)
 }
 
 module.exports = createBuffer
