@@ -146,7 +146,7 @@ function createBuffer(gl, type, data, usage) {
       var tmp = pool.malloc(data.shape[0], dtype)
       var ndt = ndarray(tmp)
       ops.assign(ndt, data)
-      this.gl.bufferData(this.type, tmp, usage)
+      gl.bufferData(type, tmp, usage)
       pool.free(tmp)
     }
   } else {
