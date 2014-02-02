@@ -76,7 +76,7 @@ GLBuffer.prototype.update = function(array, offset) {
       this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp, offset)
       pool.free(tmp)
     }
-  } else if(array instanceof Array) {
+  } else if(Array.isArray(array)) {
     if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
       var t = makeScratchTypeArray(array, "uint16")
       this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, t.subarray(0, array.length), offset)

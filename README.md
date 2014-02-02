@@ -103,6 +103,5 @@ Draws the buffer to the screen.
 * `count` is the number of vertices to draw.
 * `offset` is the offset to start drawing from.  Default `0`
 
-
 ## Credits
-(c) 2013 Mikola Lysenko. MIT License
+(c) 2013-2014 Mikola Lysenko. MIT License
