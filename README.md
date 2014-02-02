@@ -65,6 +65,23 @@ The constructor for a GL buffer works as follows:
 * `data` is either an integer, an array, a typed array, an array buffer or an ndarray representing the data of the buffer (more on this below)
 * `usage` is an optional parameter representing the intended usage for the buffer (in the WebGL sense).  It is not clear this does anything in current WebGL implementations.  Default `gl.DYNAMIC_DRAW`
 
+## Properties
+
+### `buffer.gl`
+A reference to the buffer's WebGL context
+
+### `buffer.handle`
+A handle to the underlying WebGLBuffer object
+
+### `buffer.type`
+The type of the buffer (either `gl.ARRAY_BUFFER` or `gl.ELEMENT_ARRAY_BUFFER`)
+
+### `buffer.length`
+The size of the buffer in bytes
+
+### `buffer.usage`
+The internal WebGL usage for the buffer.
+
 ## Methods
 
 ### `buffer.bind()`

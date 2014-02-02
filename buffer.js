@@ -26,7 +26,7 @@ function updateTypeArray(gl, type, len, usage, data, offset) {
     return data.length
   }
   if(data.length + offset > len) {
-    throw new Error("If resizing buffer, offset must be 0")
+    throw new Error("gl-buffer: If resizing buffer, offset must be 0")
   }
   gl.bufferSubData(type, offset, data)
   return len
@@ -47,8 +47,8 @@ GLBuffer.prototype.update = function(array, offset) {
   }
   this.bind()
   if(typeof array === "number") {
-    if(offset >= 0) {
-      throw new Error("Offset must be < 0 to resize buffer")
+    if(offset > 0) {
+      throw new Error("gl-buffer: Cannot specify offset when resizing buffer")
     }
     this.gl.bufferData(this.type, array, this.usage)
     this.length = array
@@ -61,7 +61,7 @@ GLBuffer.prototype.update = function(array, offset) {
       dtype = "uint16"
     }
     if(array.shape.length !== 1) {
-      throw new Error("Array length must be 1")
+      throw new Error("gl-buffer: Array length must be 1")
     }
     if(dtype === array.dtype && array.stride[0] === 1) {
       if(array.offset === 0 && array.data.length === array.shape[0]) {
@@ -137,7 +137,7 @@ function createBuffer(gl, type, data, usage) {
       dtype = "uint16"
     }
     if(data.shape.length !== 1) {
-      throw new Error("Array shape must be 1D")
+      throw new Error("gl-buffer: Array shape must be 1D")
     }
     var len = data.shape[0]
     if(dtype === data.type && data.stride[0] === 1) {
@@ -150,7 +150,13 @@ function createBuffer(gl, type, data, usage) {
       pool.free(tmp)
     }
   } else {
-    throw new Error("Invalid format for buffer data")
+    throw new Error("gl-buffer: Invalid format for buffer data")
+  }
+  if(type !== gl.ARRAY_BUFFER && type !== gl.ELEMENT_ARRAY_BUFFER) {
+    throw new Error("gl-buffer: Invalid type for webgl buffer")
+  }
+  if(usage !== gl.DYNAMIC_DRAW && usage !== gl.STATIC_DRAW && usage !== gl.STREAM_DRAW) {
+    throw new Error("gl-buffer: Invalid usage for buffer")
   }
   return new GLBuffer(gl, type, handle, len, usage)
 }
