@@ -58,11 +58,11 @@ var createBuffer = require("gl-buffer")
 ## Constructor
 The constructor for a GL buffer works as follows:
 
-### `var buffer = createBuffer(gl[, type], data[, usage])`
+### `var buffer = createBuffer(gl[, data, type, usage])`
 
 * `gl` is a WebGL context
+* `data` is either an integer, an array, a typed array, an array buffer or an ndarray representing the data of the buffer.  Default is `0`
 * `type` is an optional parameter specifying the type of the webgl buffer.  Default is `gl.ARRAY_BUFFER`.
-* `data` is either an integer, an array, a typed array, an array buffer or an ndarray representing the data of the buffer (more on this below)
 * `usage` is an optional parameter representing the intended usage for the buffer (in the WebGL sense).  It is not clear this does anything in current WebGL implementations.  Default `gl.DYNAMIC_DRAW`
 
 ## Properties
@@ -94,7 +94,7 @@ Deletes the buffer releasing all associated resources.  Equivalent to `gl.delete
 Updates the data in the buffer. There are two basic modes to this function.  In the first, it calls `gl.bufferSubData` to update a portion of the buffer in place, and in the second it calls `gl.bufferData` to completely resize the buffer.
 
 * `data` the new data to add to the buffer.  This follows the same semantics as in the constructor.
-* `offset` the offset to copy data into the buffer from *or* if `offset < 0` then the buffer is resized by calling `gl.bufferData` instead of `gl.bufferSubData`.  Default `0`.
+* `offset` the offset **in bytes** to copy data into the buffer from *or* if unspecified then the buffer is resized by calling `gl.bufferData` instead of `gl.bufferSubData`.  Default `0`.
 
 ## Credits
 (c) 2013-2014 Mikola Lysenko. MIT License
