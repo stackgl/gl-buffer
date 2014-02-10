@@ -34,5 +34,5 @@ shell.on("gl-init", function() {
 })
 
 shell.on("gl-render", function(t) {
-  buffer.draw(shell.gl.TRIANGLES, 3)
+  shell.gl.drawArrays(shell.gl.TRIANGLES, 0, 3)
 })

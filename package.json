@@ -7,9 +7,9 @@
     "example": "example"
   },
   "dependencies": {
-    "ndarray": "^1.0.10",
-    "typedarray-pool": "^0.1.1",
-    "ndarray-ops": "^1.1.0"
+    "ndarray": "<2 >=1.0.10",
+    "typedarray-pool": "<1 >=0.1.1",
+    "ndarray-ops": "<2 >=1.1.0"
   },
   "devDependencies": {
     "gl-shader": "~0.0.2",

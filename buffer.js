@@ -91,19 +91,6 @@ GLBuffer.prototype.update = function(array, offset) {
   }
 }
 
-GLBuffer.prototype.draw = function(mode, count, offset) {
-  offset = offset || 0
-  var gl = this.gl
-  if(this.type === gl.ARRAY_BUFFER) {
-    gl.drawArrays(mode, offset, count)
-  } else if(this.type === gl.ELEMENT_ARRAY_BUFFER) {
-    this.bind()
-    gl.drawElements(mode, count, gl.UNSIGNED_SHORT, offset)
-  } else {
-    throw new Error("Invalid type for WebGL buffer")
-  }
-}
-
 function createBuffer(gl, type, data, usage) {
   if(data === undefined) {
     data = type
