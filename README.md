@@ -41,7 +41,7 @@ shell.on("gl-init", function() {
 })
 
 shell.on("gl-render", function(t) {
-  buffer.draw(shell.gl.TRIANGLES, 3)
+  shell.gl.drawArrays(shell.gl.TRIANGLES, 0, 3)
 })
 ```
 
@@ -95,13 +95,6 @@ Updates the data in the buffer. There are two basic modes to this function.  In 
 
 * `data` the new data to add to the buffer.  This follows the same semantics as in the constructor.
 * `offset` the offset to copy data into the buffer from *or* if `offset < 0` then the buffer is resized by calling `gl.bufferData` instead of `gl.bufferSubData`.  Default `0`.
-
-### `buffer.draw(mode, count[, offset])`
-Draws the buffer to the screen.
-
-* `mode` is the mode to use when drawing the buffer, for example `gl.TRIANGLES`, `gl.LINES`, etc.
-* `count` is the number of vertices to draw.
-* `offset` is the offset to start drawing from.  Default `0`
 
 ## Credits
 (c) 2013-2014 Mikola Lysenko. MIT License
