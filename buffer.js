@@ -70,7 +70,7 @@ proto.update = function(array, offset) {
     offset = -1
   }
   this.bind()
-  if(typeof array.shape !== "undefined") { //ndarray
+  if(typeof array === "object" && typeof array.shape !== "undefined") { //ndarray
     var dtype = array.dtype
     if(SUPPORTED_TYPES.indexOf(dtype) < 0) {
       dtype = "float32"
@@ -108,7 +108,7 @@ proto.update = function(array, offset) {
       this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, t.subarray(0, array.length), offset)
     }
     pool.free(t)
-  } else if(typeof array.length === "number") { //Typed array
+  } else if(typeof array === "object" && typeof array.length === "number") { //Typed array
     this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, array, offset)
   } else if(typeof array === "number" || array === undefined) { //Number/default
     if(offset >= 0) {
