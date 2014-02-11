@@ -114,6 +114,10 @@ proto.update = function(array, offset) {
     if(offset >= 0) {
       throw new Error("gl-buffer: Cannot specify offset when resizing buffer")
     }
+    array = array | 0
+    if(array <= 0) {
+      array = 1
+    }
     this.gl.bufferData(this.type, array|0, this.usage)
     this.length = array
   } else { //Error, case should not happen
