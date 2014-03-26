@@ -3,6 +3,7 @@
 var pool = require("typedarray-pool")
 var ops = require("ndarray-ops")
 var ndarray = require("ndarray")
+var webglew = require("webglew")
 
 var SUPPORTED_TYPES = [
   "uint8",
@@ -76,7 +77,13 @@ proto.update = function(array, offset) {
       dtype = "float32"
     }
     if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
-      dtype = "uint16"
+      var wgl = weblew(gl)
+      var ext = wgl.OES_element_index_uint
+      if(ext && dtype !== "uint16") {
+        dtype = "uint32"
+      } else {
+        dtype = "uint16"
+      }
     }
     if(dtype === array.dtype && isPacked(array.shape, array.stride)) {
       if(array.offset === 0 && array.data.length === array.shape[0]) {
