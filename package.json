@@ -9,7 +9,8 @@
   "dependencies": {
     "ndarray": "^1.0.11",
     "typedarray-pool": "^1.0.0",
-    "ndarray-ops": "^1.1.0"
+    "ndarray-ops": "^1.1.0",
+    "webglew": "0.0.0"
   },
   "devDependencies": {
     "gl-shader": "~0.0.2",
