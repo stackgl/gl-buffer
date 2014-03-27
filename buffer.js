@@ -77,7 +77,7 @@ proto.update = function(array, offset) {
       dtype = "float32"
     }
     if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
-      var wgl = weblew(gl)
+      var wgl = webglew(gl)
       var ext = wgl.OES_element_index_uint
       if(ext && dtype !== "uint16") {
         dtype = "uint32"
@@ -133,6 +133,7 @@ proto.update = function(array, offset) {
 }
 
 function createBuffer(gl, data, type, usage) {
+  webglew(gl)
   type = type || gl.ARRAY_BUFFER
   usage = usage || gl.DYNAMIC_DRAW
   if(type !== gl.ARRAY_BUFFER && type !== gl.ELEMENT_ARRAY_BUFFER) {
