@@ -9,7 +9,7 @@ A wrapper for WebGL buffer objects.
 ```javascript
 var shell = require("gl-now")()
 var glslify = require("glslify")
-var createBuffer = require("gl-buffer")
+var createBuffer = require("../buffer.js")
 
 var createShader = glslify({
   vertex: "\
@@ -21,10 +21,10 @@ var createShader = glslify({
     }",
   fragment: "\
     precision highp float;\
-    uniform vec2 tp;\
+    uniform float tick;\
     varying vec2 uv;\
     void main() {\
-      gl_FragColor = vec4(0.5*(uv+1.0), 0.5*(cos(tp.x)+1.0), 1.0);\
+      gl_FragColor = vec4(0.5*(uv+1.0), 0.5*(cos(tick)+1.0), 1.0);\
     }",
   inline: true
 })
@@ -40,12 +40,14 @@ shell.on("gl-init", function() {
   //Create shader
   shader = createShader(gl)
   shader.attributes.position.location = 0
-  shader.attributes.position.pointer()
 })
 
 shell.on("gl-render", function(t) {
   var gl = shell.gl
   shader.bind()
+  buffer.bind()
+  shader.attributes.position.pointer()
+  shader.uniforms.tick = Date.now() / 1000.0
   gl.drawArrays(gl.TRIANGLES, 0, 3)
 })
 ```
