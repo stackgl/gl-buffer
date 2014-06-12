@@ -4,6 +4,8 @@ A wrapper for WebGL buffer objects.
 
 # Example
 
+[View this demo in your browser](http://modules.gl/gl-buffer)
+
 ```javascript
 var shell = require("gl-now")()
 var glslify = require("glslify")
