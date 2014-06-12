@@ -54,7 +54,7 @@ shell.on("gl-render", function(t) {
 
 Output:
 
-<img src="screenshot.png">
+<img src="http://modules.gl/gl-buffer/screenshot.png">
 
 # Install
 
