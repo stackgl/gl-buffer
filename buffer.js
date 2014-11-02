@@ -29,6 +29,10 @@ proto.bind = function() {
   this.gl.bindBuffer(this.type, this.handle)
 }
 
+proto.unbind = function() {
+  this.gl.bindBuffer(this.type, null)
+}
+
 proto.dispose = function() {
   this.gl.deleteBuffer(this.handle)
 }
