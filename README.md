@@ -9,7 +9,7 @@ A wrapper for WebGL buffer objects.
 ```javascript
 var shell = require("gl-now")()
 var glslify = require("glslify")
-var createBuffer = require("../buffer.js")
+var createBuffer = require("gl-buffer")
 
 var createShader = glslify({
   vertex: "\
@@ -36,7 +36,7 @@ shell.on("gl-init", function() {
 
   //Create buffer
   buffer = createBuffer(gl, [-1, 0, 0,-1, 1, 1])
-  
+
   //Create shader
   shader = createShader(gl)
   shader.attributes.position.location = 0

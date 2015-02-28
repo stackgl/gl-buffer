@@ -29,6 +29,10 @@ proto.bind = function() {
   this.gl.bindBuffer(this.type, this.handle)
 }
 
+proto.unbind = function() {
+  this.gl.bindBuffer(this.type, null)
+}
+
 proto.dispose = function() {
   this.gl.deleteBuffer(this.handle)
 }
@@ -77,7 +81,7 @@ proto.update = function(array, offset) {
       dtype = "float32"
     }
     if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
-      var wgl = webglew(gl)
+      var wgl = webglew(this.gl)
       var ext = wgl.OES_element_index_uint
       if(ext && dtype !== "uint16") {
         dtype = "uint32"
