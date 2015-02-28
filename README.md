@@ -4,7 +4,7 @@ A wrapper for WebGL buffer objects.
 
 # Example
 
-[View this demo in your browser](http://modules.gl/gl-buffer)
+[View this demo in your browser](http://stack.gl/gl-buffer)
 
 ```javascript
 var shell = require("gl-now")()
@@ -54,7 +54,7 @@ shell.on("gl-render", function(t) {
 
 Output:
 
-<img src="http://modules.gl/gl-buffer/screenshot.png">
+<img src="http://stack.gl/gl-buffer/screenshot.png">
 
 # Install
 

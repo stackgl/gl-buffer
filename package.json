@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mikolalysenko/gl-buffer.git"
+    "url": "git://github.com/stackgl/gl-buffer.git"
   },
   "keywords": [
     "webgl",
@@ -37,6 +37,6 @@
   "readmeFilename": "README.md",
   "gitHead": "fa00ce204834850a2a9118824aca293399bc3e4d",
   "bugs": {
-    "url": "https://github.com/mikolalysenko/gl-buffer/issues"
+    "url": "https://github.com/stackgl/gl-buffer/issues"
   }
 }
