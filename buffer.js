@@ -3,7 +3,6 @@
 var pool = require("typedarray-pool")
 var ops = require("ndarray-ops")
 var ndarray = require("ndarray")
-var webglew = require("webglew")
 
 var SUPPORTED_TYPES = [
   "uint8",
@@ -38,7 +37,7 @@ proto.dispose = function() {
 }
 
 function updateTypeArray(gl, type, len, usage, data, offset) {
-  var dataLen = data.length * data.BYTES_PER_ELEMENT 
+  var dataLen = data.length * data.BYTES_PER_ELEMENT
   if(offset < 0) {
     gl.bufferData(type, data, usage)
     return dataLen
@@ -81,8 +80,7 @@ proto.update = function(array, offset) {
       dtype = "float32"
     }
     if(this.type === this.gl.ELEMENT_ARRAY_BUFFER) {
-      var wgl = webglew(this.gl)
-      var ext = wgl.OES_element_index_uint
+      var ext = gl.getExtension('OES_element_index_uint')
       if(ext && dtype !== "uint16") {
         dtype = "uint32"
       } else {
@@ -100,9 +98,9 @@ proto.update = function(array, offset) {
       var ndt = ndarray(tmp, array.shape)
       ops.assign(ndt, array)
       if(offset < 0) {
-        this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp, offset)  
+        this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp, offset)
       } else {
-        this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp.subarray(0, array.size), offset)  
+        this.length = updateTypeArray(this.gl, this.type, this.length, this.usage, tmp.subarray(0, array.size), offset)
       }
       pool.free(tmp)
     }
@@ -137,7 +135,6 @@ proto.update = function(array, offset) {
 }
 
 function createBuffer(gl, data, type, usage) {
-  webglew(gl)
   type = type || gl.ARRAY_BUFFER
   usage = usage || gl.DYNAMIC_DRAW
   if(type !== gl.ARRAY_BUFFER && type !== gl.ELEMENT_ARRAY_BUFFER) {
